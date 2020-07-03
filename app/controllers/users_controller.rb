@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    
+
     def index
     end
 
@@ -21,4 +21,7 @@ class UsersController < ApplicationController
     def destroy
     end
 
+    private
+    
+    
 end
