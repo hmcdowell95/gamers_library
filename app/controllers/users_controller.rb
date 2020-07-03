@@ -23,5 +23,16 @@ class UsersController < ApplicationController
 
     private
     
+    def logged_in?
+        return head(:forbidden) unless session.include? :user_id
+    end
+
+    def set_user
+        @user = User.find(params[:id])
+    end
+
+    def user_params
+        params.require(:user).permit(:username, :password)
+    end
     
 end
