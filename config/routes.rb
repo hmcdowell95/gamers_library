@@ -3,6 +3,6 @@ Rails.application.routes.draw do
     resources :systems, only: [:index, :show]
     resources :games, only: [:index, :show, :new, :edit]
   end
-  resources :systems
+  resources :systems, only: [:index, :show]
   resources :games
 end

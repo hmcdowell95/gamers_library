@@ -1,23 +1,11 @@
 class SystemsController < ApplicationController
+
     def index
-    end
-
-    def new 
-    end
-
-    def create
+        @systems = System.all
     end
 
     def show
-    end
-
-    def edit
-    end
-
-    def update
-    end
-
-    def destroy
+        @system = System.find(params[:id])
     end
 
 end
