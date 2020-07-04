@@ -30,12 +30,15 @@ class UsersController < ApplicationController
     end
 
     def edit
+       user_match
     end
 
     def update
+        user_match
     end
 
     def destroy
+        user_match
     end
 
     private
@@ -50,6 +53,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:username, :password)
+    end
+
+    def user_match
+        return head(:forbidden) unless @user.id == session[:user_id]
     end
 
 end
