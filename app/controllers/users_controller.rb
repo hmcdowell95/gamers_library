@@ -35,10 +35,18 @@ class UsersController < ApplicationController
 
     def update
         user_match
+        @user.update(user_params)
+        if @user.save
+            redirect_to user_path(@user)
+        else
+            render :edit
+        end
     end
 
     def destroy
         user_match
+        User.find(@user.id).destroy
+        redirect_to new_user_path
     end
 
     private
