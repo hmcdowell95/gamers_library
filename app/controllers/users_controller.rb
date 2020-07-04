@@ -1,12 +1,24 @@
 class UsersController < ApplicationController
 
     def index
+        @users = User.all
     end
 
     def new 
     end
 
     def create
+        if params[:user][:password] == params[:user][:password_confirmation] 
+            @user = User.new(user_params)
+            if @user.valid?
+                @user.save
+                redirect_to user_path(@user)
+            else
+                redirect_to new_user_path, alert: "username has been taken already and/or password cannot be blank"
+            end
+        else
+            redirect_to new_user_path, alert: "passwords don't match"
+        end
     end
 
     def show
@@ -34,5 +46,5 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:username, :password)
     end
-    
+
 end
