@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+    before_action :logged_in?
+    before_action :set_user
+    skip_before_action :logged_in?, only: [:new, :create]
+    skip_before_action :set_user, only: [:index, :new, :create]
 
     def index
         @users = User.all
@@ -12,9 +16,10 @@ class UsersController < ApplicationController
             @user = User.new(user_params)
             if @user.valid?
                 @user.save
+                session[:user_id] = @user.id
                 redirect_to user_path(@user)
             else
-                redirect_to new_user_path, alert: "username has been taken already and/or password cannot be blank"
+                render :new
             end
         else
             redirect_to new_user_path, alert: "passwords don't match"
