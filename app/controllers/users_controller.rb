@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
     before_action :logged_in?
     before_action :set_user
-    skip_before_action :logged_in?, only: [:new, :create]
-    skip_before_action :set_user, only: [:index, :new, :create]
+    skip_before_action :logged_in?, only: [:new, :create, :home]
+    skip_before_action :set_user, only: [:index, :new, :create, :home]
 
     def index
         @users = User.all
@@ -52,6 +52,9 @@ class UsersController < ApplicationController
         user_match
         User.find(@user.id).destroy
         redirect_to new_user_path
+    end
+
+    def home
     end
 
     private

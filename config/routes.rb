@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   end
   resources :systems, only: [:index, :show]
   resources :games
-  post 'add_systems' => 'systems#add_systems'
+  post '/add_systems' => 'systems#add_systems'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
+  root 'users#home'
 end
