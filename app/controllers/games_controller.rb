@@ -41,4 +41,14 @@ class GamesController < ApplicationController
     def destroy
     end
 
+    private
+
+    def game_params
+        params.require(:game).permit(:name, :rating, :description, :user_id, :system_id)
+    end
+
+    def set_game
+        @game = Game.find(params[:id])
+    end
+    
 end
