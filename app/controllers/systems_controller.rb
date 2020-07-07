@@ -21,4 +21,8 @@ class SystemsController < ApplicationController
         return head(:forbidden) unless session.include? :user_id
     end
 
+    def system_params
+        params.require(:system).permit(system_ids:[])
+    end
+
 end
