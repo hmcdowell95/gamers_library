@@ -9,6 +9,12 @@ class SystemsController < ApplicationController
         @system = System.find(params[:id])
     end
 
+    def add_systems
+        @user = current_user
+        @user.update(system_params)
+        redirect_to user_path(@user)
+    end
+
     private
     
     def logged_in?

@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-
+    before_action :logged_in
 
     def index
         if params[:user_id]
@@ -50,5 +50,9 @@ class GamesController < ApplicationController
     def set_game
         @game = Game.find(params[:id])
     end
-    
+
+    def logged_in
+        return head(:forbidden) unless session.include? :user_id
+    end
+
 end

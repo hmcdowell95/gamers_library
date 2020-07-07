@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   end
   resources :systems, only: [:index, :show]
   resources :games
+  post 'add_systems' => 'systems#add_systems'
 end
