@@ -68,6 +68,11 @@ class GamesController < ApplicationController
     end
 
     def destroy
+        set_game
+        @user = current_user
+        @user.games.delete(@game.id)
+        @user.save
+        redirect_to user_games_path
     end
 
     private
