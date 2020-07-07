@@ -9,10 +9,11 @@ class UsersController < ApplicationController
     end
 
     def new 
+        @user = User.new
     end
 
     def create
-        if params[:user][:password] == params[:user][:password_confirmation] 
+        if params[:user][:password] == params[:user][:password_confirmation] && params[:user][:password].strip != ""
             @user = User.new(user_params)
             if @user.valid?
                 @user.save
@@ -35,11 +36,15 @@ class UsersController < ApplicationController
 
     def update
         user_match
-        @user.update(user_params)
-        if @user.save
-            redirect_to user_path(@user)
+        if params[:user][:password] == params[:user][:password_confirmation] && params[:user][:password].strip != ""
+            @user.update(user_params)
+            if @user.save
+                redirect_to user_path(@user)
+            else
+                render :edit
+            end
         else
-            render :edit
+            redirect_to edit_user_path(@user), alert: "passwords don't match"
         end
     end
 
