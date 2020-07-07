@@ -2,7 +2,7 @@ class GamesController < ApplicationController
     before_action :logged_in
 
     def index
-        if params[:user_id].to_i == session[:user_id]
+        if params[:user_id]
             @user = User.find_by(id: params[:user_id])
             if @user.nil?
               redirect_to users_path, alert: "User not found"
@@ -38,15 +38,33 @@ class GamesController < ApplicationController
             if @game.nil?
               redirect_to user_games_path(@user), alert: "Game not found"
             end
-          else
+        else
             set_game
-          end
+        end
     end
 
     def edit
+        if params[:user_id].to.i == session[:user_id]
+            user = User.find_by(id: params[:user_id])
+            if user.nil?
+              redirect_to users_path, alert: "User not found."
+            else
+              @game = user.games.find_by(id: params[:id])
+              redirect_to user_games_path(user), alert: "Game not found." if @game.nil?
+            end
+        else
+            set_game
+        end
     end
 
     def update
+        set_game
+        @game.update(game_params)
+        if @game.save
+            redirect_to game_path(@game)
+        else
+            render :edit
+        end
     end
 
     def destroy
