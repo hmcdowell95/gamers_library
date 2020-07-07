@@ -21,6 +21,15 @@ class GamesController < ApplicationController
     end
 
     def show
+        if params[:user_id]
+            @user = User.find_by(id: params[:user_id])
+            @game = @user.games.find_by(id: params[:id])
+            if @game.nil?
+              redirect_to user_games_path(@user), alert: "Game not found"
+            end
+          else
+            set_game
+          end
     end
 
     def edit
