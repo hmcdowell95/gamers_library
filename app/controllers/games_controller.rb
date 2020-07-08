@@ -11,19 +11,16 @@ class GamesController < ApplicationController
               @games = @user.games
             end
         else
-            @games = Game.all
+            @games = Game.search(params[:query])
         end
     end
 
     def new 
-        if params[:user_id].to_i == session[:user_id] && !User.exists?(params[:user_id])
-            redirect_to users_path, alert: "User not found."
-        else
-            @game = Game.new
-        end
+        @game = Game.new
     end
 
     def create
+        # refactor for build or create/find
         @game = Game.new(game_params)
         if @game.valid?
             @game.creator = session[:user_id]

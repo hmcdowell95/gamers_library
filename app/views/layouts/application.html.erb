@@ -8,7 +8,18 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header>
+    <% if session[:user_id] %>
+      <%= form_tag games_path, :method => "get" do %>
+        <%= label_tag(:query, "Search Games") %>
+        <%= text_field_tag :query, params[:query] %>
+        <%= submit_tag("Search", :name => nil)%>
+      <% end %>
+      <%= form_tag("/logout", method: "post") do %>
+        <%= button_tag "Log Out" %>
+      <% end %>
+    <% end %>
+  </header>
   <body>
     <%= yield %>
   </body>

@@ -6,7 +6,7 @@
 <% end %>
 <% if @user.id == session[:user_id] %>
     <%= link_to "Edit Systems", systems_path %><br>
-    <%= link_to "Add Games", new_game_path %>
+    <%= link_to "Add Games", "/games/new" %>
 <% end %>
 
 <br>
