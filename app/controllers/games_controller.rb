@@ -25,6 +25,7 @@ class GamesController < ApplicationController
     def create
         @game = Game.new(game_params)
         if @game.valid?
+            # creator function
             @game.save
             redirect_to game_path(@game)
         else
@@ -45,7 +46,8 @@ class GamesController < ApplicationController
     end
 
     def edit
-        if params[:user_id].to.i == session[:user_id]
+        # add creator check
+        if params[:user_id].to.i == session[:user_id] 
             user = User.find_by(id: params[:user_id])
             if user.nil?
               redirect_to users_path, alert: "User not found."
