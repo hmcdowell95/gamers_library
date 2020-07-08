@@ -4,6 +4,11 @@
 <% @user.systems.each do |x| %>
     <p><%= x.name %> Company: <%= x.company %></p>
 <% end %>
+<% if @user.id == session[:user_id] %>
+    <%= link_to "Edit Systems", systems_path %><br>
+    <%= link_to "Add Games", new_game_path %>
+<% end %>
+
 <br>
 <h2>Games</h2><br>
 <% @user.games.each do |x| %>
