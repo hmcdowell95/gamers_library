@@ -72,7 +72,14 @@ class GamesController < ApplicationController
     end
 
     def last_played
-        @usersgame = UserGame.find_by(user_id: session[:user_id], game_id: )
+        @usersgame = UserGame.find_by(user_id: session[:user_id], game_id: params[:id])
+        if @usersgame
+            @usersgame.last_played = params[:input][:last_played]
+            redirect_to user_games_path(session[:user_id])
+        else
+            redirect_to game_path(params[:id]), alert: "Have you played this game?"
+        end
+    end
 
     private
 
