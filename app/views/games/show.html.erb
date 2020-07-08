@@ -6,7 +6,8 @@
 
 <% if set_users_game @game %>
     <%= form_for :input, url: "/games/#{@game.id}/last_played", method: "post" do |f| %>
-        <%= f.label :last_played %>
+        <%= f.label "Last Played:" %> 
+        <%= time_played(@game) %>
         <%= f.text_field :last_played %>
         <%= f.submit "Update" %>
     <% end %>
