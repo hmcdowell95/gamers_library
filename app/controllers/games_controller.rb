@@ -27,6 +27,7 @@ class GamesController < ApplicationController
         if @game.valid?
             @game.creator = session[:user_id]
             @game.save
+            users_game
             redirect_to game_path(@game)
         else
             render :new
@@ -63,6 +64,7 @@ class GamesController < ApplicationController
 
     def update
         set_game
+        return head(:forbidden) unless @game.creator == session[:user_id]
         @game.update(game_params)
         if @game.save
             redirect_to game_path(@game)
@@ -82,7 +84,7 @@ class GamesController < ApplicationController
     private
 
     def game_params
-        params.require(:game).permit(:name, :rating, :description, :user_id, :system_id)
+        params.require(:game).permit(:name, :rating, :description, :system_id)
     end
 
     def set_game
@@ -93,4 +95,9 @@ class GamesController < ApplicationController
         return head(:forbidden) unless session.include? :user_id
     end
 
+    def users_game
+        @user = User.find(session[:user_id])
+        @user.games << @game
+        @user.save
+    end
 end
