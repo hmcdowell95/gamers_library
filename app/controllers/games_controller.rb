@@ -71,6 +71,9 @@ class GamesController < ApplicationController
         redirect_to user_games_path
     end
 
+    def last_played
+        @usersgame = UserGame.find_by(user_id: session[:user_id], game_id: )
+
     private
 
     def game_params
