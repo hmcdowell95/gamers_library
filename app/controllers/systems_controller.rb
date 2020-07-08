@@ -2,7 +2,6 @@ class SystemsController < ApplicationController
     before_action :logged_in?
 
     def index
-        @systems = System.all
     end
 
     def show
@@ -10,7 +9,7 @@ class SystemsController < ApplicationController
     end
 
     def add_systems
-        @user = current_user
+        @user = User.find(session[:user_id])
         @user.update(system_params)
         redirect_to user_path(@user)
     end
