@@ -18,7 +18,7 @@ class GamesController < ApplicationController
         if params[:user_id].to_i == session[:user_id] && !User.exists?(params[:user_id])
             redirect_to users_path, alert: "User not found."
         else
-            @game = Game.new(user_id: params[:user_id])
+            @game = Game.new
         end
     end
 
@@ -49,17 +49,7 @@ class GamesController < ApplicationController
     def edit
         game = Game.find(params[:id])
         return head(:forbidden) unless game.creator == session[:user_id]
-        if params[:user_id].to.i == session[:user_id] 
-            user = User.find_by(id: params[:user_id])
-            if user.nil?
-              redirect_to users_path, alert: "User not found."
-            else
-              @game = user.games.find_by(id: params[:id])
-              redirect_to user_games_path(user), alert: "Game not found." if @game.nil?
-            end
-        else
-            set_game
-        end
+        set_game
     end
 
     def update
