@@ -10,7 +10,12 @@
         <%= f.text_field :last_played %>
         <%= f.submit "Update" %>
     <% end %>
-    delete from library
+    <br>
+    <%= form_tag("/games/#{@game.id}", method: :delete) do %>
+        <%= button_tag "Remove from library" %>
+    <% end %>
 <% else %>
-    add to library
+    <%= form_tag("/games/#{@game.id}/add_game") do %>
+        <%= button_tag "Add to library" %>
+    <% end %>
 <% end %>

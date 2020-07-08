@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+    include GamesHelper
     before_action :logged_in
 
     def index
@@ -65,10 +66,8 @@ class GamesController < ApplicationController
 
     def destroy
         set_game
-        @user = current_user
-        @user.games.delete(@game.id)
-        @user.save
-        redirect_to user_games_path
+        set_users_game(@game).destroy
+        redirect_to user_games_path(session[:user_id])
     end
 
     def last_played
