@@ -81,6 +81,12 @@ class GamesController < ApplicationController
         end
     end
 
+    def add_game
+        set_game
+        users_game
+        redirect_to user_games_path(@user)
+    end
+
     private
 
     def game_params

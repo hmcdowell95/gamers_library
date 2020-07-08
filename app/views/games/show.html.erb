@@ -3,3 +3,14 @@
 <p>Rated: <%= @game.rating %></p>
 <p>System: <%= @game.system.name %></p>
 <p>Info: <%= @game.description %></p> 
+
+<% if set_users_game @game %>
+    <%= form_for :input, url: "/games/#{@game.id}/last_played", method: "post" do |f| %>
+        <%= f.label :last_played %>
+        <%= f.text_field :last_played %>
+        <%= f.submit "Update" %>
+    <% end %>
+    delete from library
+<% else %>
+    add to library
+<% end %>

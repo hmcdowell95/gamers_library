@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :systems, only: [:index, :show]
   resources :games
   post '/add_systems' => 'systems#add_systems'
-  post 'games/:id/last_played' => 'games#last_played'
+  post '/games/:id/last_played' => 'games#last_played'
+  post '/games/:id/add_game' => 'games#add_game'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
