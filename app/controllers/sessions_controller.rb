@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
     def fb_login
         @user = User.find_or_create_by(uid: auth['uid']) do |u|
             u.username = auth['info']['name']
+            u.password = auth['info']['email']
         end
         session[:user_id] = @user.id
         render 'users/home'
