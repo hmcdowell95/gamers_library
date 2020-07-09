@@ -20,3 +20,8 @@
         <%= button_tag "Add to library" %>
     <% end %>
 <% end %>
+<% if @game.creator == current_user.id %>
+    <%= form_tag("/games/#{@game.id}/edit", method: :get) do %>
+        <%= button_tag "Edit" %>
+    <% end %>
+<% end %>

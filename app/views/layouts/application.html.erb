@@ -18,6 +18,7 @@
       <%= form_tag("/logout", method: "post") do %>
         <%= button_tag "Log Out" %>
       <% end %>
+      <%= link_to "Home", "/" %>
     <% end %>
     <% if flash[:alert] %>
       <%= flash[:alert] %>
