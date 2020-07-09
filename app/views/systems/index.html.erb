@@ -1,6 +1,6 @@
-<h1><%= current_user %> Systems</h1>
+<h1><%= current_user.username %> Systems</h1>
 <br>
 <%= form_for :system, url: "/add_systems", method: "post" do |f| %>
-    <p><%= f.collection_check_boxes :system_ids, System.all, :id, :name %></p>
+    <p><%= f.collection_check_boxes :system_ids, System.all, :id, :name, {:checked => current_user.systems.map(&:id)} %></p>
     <%= f.submit "Save Systems" %>
 <% end %>

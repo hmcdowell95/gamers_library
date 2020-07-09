@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     end
 
     def create
-        # refactor for build or create/find
+        # refactor for build or create/find?
         @game = Game.new(game_params)
         if @game.valid?
             @game.creator = session[:user_id]
@@ -45,9 +45,8 @@ class GamesController < ApplicationController
     end
 
     def edit
-        game = Game.find(params[:id])
-        return head(:forbidden) unless game.creator == session[:user_id]
         set_game
+        return head(:forbidden) unless @game.creator == session[:user_id]
     end
 
     def update
