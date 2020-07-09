@@ -19,6 +19,9 @@
         <%= button_tag "Log Out" %>
       <% end %>
     <% end %>
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
+    <% end %>
   </header>
   <body>
     <%= yield %>

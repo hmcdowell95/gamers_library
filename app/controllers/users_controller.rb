@@ -15,8 +15,7 @@ class UsersController < ApplicationController
     def create
         if params[:user][:password] == params[:user][:password_confirmation] && params[:user][:password].strip != ""
             @user = User.new(user_params)
-            if @user.valid?
-                @user.save
+            if @user.save
                 session[:user_id] = @user.id
                 redirect_to user_path(@user)
             else
