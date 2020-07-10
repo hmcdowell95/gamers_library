@@ -1,8 +1,7 @@
 <% if @user %>
     <h1><%= @user.username %> Games</h1>
-    <br>
     <% @games.each do |x| %>
-        <%= link_to x.name, game_path(x) %> Rating: <%= x.rating %> Last Played: <%= time_played(x) %><br>
+        <p><%= link_to x.name, game_path(x) %> Rating: <%= x.rating %> Last Played: <%= time_played(x) %></p><br>
     <% end %>
 <% else %>
     <h1>Games</h1>

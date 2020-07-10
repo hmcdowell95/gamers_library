@@ -1,9 +1,10 @@
 <% if session[:user_id] %>
     <h2>Search for games in the search bar or check some links below</h2>
-    <h3><%= link_to "All Games", games_path %></h3>
-    <h3><%= link_to "Systems", systems_path %></h3>
-    <h4><%= link_to "Profile", user_path(session[:user_id]) %></h4>
+    <h2><%= link_to "All Games", games_path %></h2>
+    <h2><%= link_to "Systems", systems_path %></h2>
+    <h2><%= link_to "Profile", user_path(session[:user_id]) %></h2>
 <% else %>
-    <%= link_to "Sign Up", new_user_path %>
-    <%= link_to "Login", "/login" %>
+    <h1><%= link_to "Sign Up", new_user_path %></h1>
+    or
+    <h1><%= link_to "Login", "/login" %></h1>
 <% end %>

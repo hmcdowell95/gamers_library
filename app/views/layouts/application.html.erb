@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <link rel="stylesheet" href="/stylesheets/main.css" />
   <header>
     <% if session[:user_id] %>
       <%= form_tag games_path, :method => "get" do %>
@@ -19,6 +20,8 @@
         <%= button_tag "Log Out" %>
       <% end %>
       <%= link_to "Home", "/" %>
+    <% else %>
+        <h1>Welcome to Gamers Library!</h1>
     <% end %>
     <% if flash[:alert] %>
       <%= flash[:alert] %>

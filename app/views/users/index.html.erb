@@ -1,5 +1,5 @@
 <h1>User Index</h1>
 <br>
 <% @users.each do |x| %>
-    <%= link_to x.username, user_path(x) %>
+    <h3><%= link_to x.username, user_path(x) %></h3>
 <% end %>
