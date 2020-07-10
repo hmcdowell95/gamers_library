@@ -1,25 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To get this application started up.
 
-Things you may want to cover:
+* Ruby version 6. I used 6 but I think 5 will work.
 
-* Ruby version
+* Clone the repo
 
-* System dependencies
+* Database creation: 'rails db:migrate' to create database
 
-* Configuration
+* For Systems run 'rake db:seed'
 
-* Database creation
+* run 'rails s' to start it up
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # gamers_library
+
+This application is a game library. Users can selected game systems they have played and/or owned and the systems will display on their profile. Search existing games or add new ones and add those to their library.
