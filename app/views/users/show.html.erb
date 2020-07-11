@@ -11,3 +11,7 @@
 
 <br>
 <h2><%= link_to "Game Library", user_games_path(@user) %></h2>
+<br>
+<% if @user.id == session[:user_id] %>
+    <footer><%= link_to "Delete Account", "/users/#{session[:user_id]}", method: :delete %></footer>
+<% end %>

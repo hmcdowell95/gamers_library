@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     def destroy
         user_match
         User.find(@user.id).destroy
+        session.delete :user_id
         redirect_to new_user_path
     end
 

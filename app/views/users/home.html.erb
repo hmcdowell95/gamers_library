@@ -3,6 +3,7 @@
     <h2><%= link_to "All Games", games_path %></h2>
     <h2><%= link_to "Systems", systems_path %></h2>
     <h2><%= link_to "Profile", user_path(session[:user_id]) %></h2>
+    <h3><%= link_to "All Users", users_path %></h3>
 <% else %>
     <h1><%= link_to "Sign Up", new_user_path %></h1>
     or
