@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if session[:user_id] %>
     <h2>Search for games in the search bar or check some links below</h2>
     <h2><%= link_to "All Games", games_path %></h2>
     <h2><%= link_to "Systems", systems_path %></h2>
