@@ -4,13 +4,6 @@ class Game < ApplicationRecord
     has_many :users, through: :user_games
     validates :name, presence: true
     validates :rating, presence: true
-
-    def self.search(s)
-        if s
-          self.where("name LIKE ?", "%#{s}%")
-        else
-          @games = Game.all
-        end
-    end
+    scope :search, ->(s) {where("name LIKE ?", "%#{s}%")}
     
 end

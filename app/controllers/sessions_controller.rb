@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
             u.password = auth['info']['email']
         end
         session[:user_id] = @user.id
-        render 'users/home'
+        redirect_to "/"
     end
 
     def destroy

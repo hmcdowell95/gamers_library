@@ -1,5 +1,5 @@
 class SystemsController < ApplicationController
-    before_action :logged_in?
+    before_action :logged_in
 
     def index
     end
@@ -15,10 +15,6 @@ class SystemsController < ApplicationController
     end
 
     private
-    
-    def logged_in?
-        return head(:forbidden) unless session.include? :user_id
-    end
 
     def system_params
         params.require(:system).permit(system_ids:[])

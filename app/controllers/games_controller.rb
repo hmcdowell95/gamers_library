@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
     include GamesHelper
+    include ApplicationHelper
     before_action :logged_in
 
     def index
@@ -10,8 +11,10 @@ class GamesController < ApplicationController
             else
               @games = @user.games
             end
-        else
+        elsif params[:query]
             @games = Game.search(params[:query])
+        else
+            @games = Game.all
         end
     end
 
@@ -46,14 +49,13 @@ class GamesController < ApplicationController
 
     def edit
         set_game
-        return head(:forbidden) unless @game.creator == session[:user_id]
+        redirect_to game_path(@game) unless @game.creator == session[:user_id]
     end
 
     def update
         set_game
         return head(:forbidden) unless @game.creator == session[:user_id]
-        @game.update(game_params)
-        if @game.save
+        if @game.update(game_params)
             redirect_to game_path(@game)
         else
             render :edit
@@ -93,12 +95,8 @@ class GamesController < ApplicationController
         @game = Game.find(params[:id])
     end
 
-    def logged_in
-        return head(:forbidden) unless session.include? :user_id
-    end
-
     def users_game
-        @user = User.find(session[:user_id])
+        @user = current_user
         @user.games << @game
         @user.save
     end
