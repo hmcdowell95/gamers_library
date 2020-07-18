@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
     include GamesHelper
-    include ApplicationHelper
     before_action :logged_in
+    before_action :set_game, only: [:edit, :update, :destroy, :add_game]
 
     def index
         if params[:user_id]
@@ -48,13 +48,11 @@ class GamesController < ApplicationController
     end
 
     def edit
-        set_game
         redirect_to game_path(@game) unless @game.creator == session[:user_id]
     end
 
     def update
-        set_game
-        return head(:forbidden) unless @game.creator == session[:user_id]
+        redirect_to game_path(@game) unless @game.creator == session[:user_id]
         if @game.update(game_params)
             redirect_to game_path(@game)
         else
@@ -63,9 +61,8 @@ class GamesController < ApplicationController
     end
 
     def destroy
-        set_game
         set_users_game(@game).destroy
-        redirect_to user_games_path(session[:user_id])
+        redirect_to user_games_path(current_user.id)
     end
 
     def last_played
@@ -73,14 +70,13 @@ class GamesController < ApplicationController
         if @usersgame
             @usersgame.last_played = params[:input][:last_played]
             @usersgame.save
-            redirect_to user_games_path(session[:user_id])
+            redirect_to user_games_path(current_user.id)
         else
             redirect_to game_path(params[:id]), alert: "Have you played this game?"
         end
     end
 
     def add_game
-        set_game
         users_game
         redirect_to user_games_path(@user)
     end

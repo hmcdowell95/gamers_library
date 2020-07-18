@@ -10,7 +10,7 @@
   </head>
   <link rel="stylesheet" href="/stylesheets/main.css" />
   <header>
-    <% if session[:user_id] %>
+    <% if current_user %>
       <%= form_tag games_path, :method => "get" do %>
         <%= label_tag(:query, "Search Games") %>
         <%= text_field_tag :query, params[:query] %>

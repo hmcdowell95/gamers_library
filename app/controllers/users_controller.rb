@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-    before_action :logged_in
-    before_action :set_user
-    skip_before_action :logged_in, only: [:new, :create, :home]
-    skip_before_action :set_user, only: [:index, :new, :create, :home]
+    before_action :logged_in, only: [:index, :show, :edit, :update, :destroy]
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
         @users = User.all
@@ -68,7 +66,7 @@ class UsersController < ApplicationController
     end
 
     def user_match
-        return head(:forbidden) unless @user.id == session[:user_id]
+        redirect_to "/" unless @user.id == session[:user_id]
     end
 
 end
